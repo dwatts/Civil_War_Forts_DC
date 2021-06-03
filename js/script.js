@@ -323,7 +323,7 @@
           type: "simple",
           symbol: {
             type: "simple-fill",
-            color: [0, 0, 0, 0],
+            color: [0, 0, 0, 1],
             outline: {
               color: [0,0,0,0.2],
               width: 6,
@@ -337,6 +337,7 @@
             maxScale: 0,
             minScale: 0,
             opacity: 0.8,
+            popupEnabled: false,
             elevationInfo: {
               mode: "on-the-ground",    
             },
@@ -455,7 +456,265 @@
             renderer: washMonRenderer,
             visible: false
         });
-                              
+
+/******Forts Popup Test****/
+
+      var fortsTemplate = {
+        outFields: ["*"],
+          //title: "{name_e}",
+          content: function (feature) {
+            return setContentInfo(feature.graphic.attributes);
+        },    
+      };  
+
+      const fortsFootprint = new FeatureLayer({
+        url: "https://services5.arcgis.com/CmuSiXApoWtqLYty/arcgis/rest/services/Forts_Footprints/FeatureServer",
+        maxScale: 0,
+        minScale: 0,
+        popupEnabled: false,
+        outFields: ["*"],         
+        opacity: 0,
+        popupTemplate: fortsTemplate,
+        elevationInfo: {
+          mode: "on-the-ground",    
+        }
+      });            
+        
+      function setContentInfo(results) {
+        var Albany = "<img id='frtImg' alt='Fort Albany' src='img/Fort_Albany.jpg'/>";
+        var BunkerHill = "<img id='frtImg' alt='Fort Bunkerhill' src='img/Fort_BunkerHill.jpg'/>";
+        var DeRussy = "<img id='frtImg' alt='Fort DeRussy' src='img/Fort_DeRussy.jpg'/>";
+        var Saratoga = "<img id='frtImg' alt='Fort Saratoga' src='img/Fort_Saratoga.jpg'/>";
+        var Thayer = "<img id='frtImg' alt='Fort Thayer' src='img/Fort_Thayer.jpg'/>";
+        var Chain = "<img id='frtImg' alt='Battery Martin Scott / Chain Bridge Battery' src='img/Chain_Bridge_Battery.jpg'/>";
+        var Bayard = "<img id='frtImg' alt='Fort Bayard' src='img/Fort_Bayard.jpg'/>";
+        var CFSmith = "<img id='frtImg' alt='Fort C.F. Smith' src='img/Fort_CFSmith.jpg'/>";
+        var Carroll = "<img id='frtImg' alt='Fort Carroll' src='img/Fort_Carroll.jpg'/>";
+        var Corcoran = "<img id='frtImg' alt='Fort Corcoran' src='img/Fort_Corcoran.jpg'/>";
+        var Craig = "<img id='frtImg' alt='Fort Craig' src='img/Fort_Craig.jpg'/>";
+        var Ellsworth = "<img id='frtImg' alt='Fort Ellsworth' src='img/Fort_Ellsworth.jpg'/>";
+        var Foote = "<img id='frtImg' alt='Fort Foote' src='img/Fort_Foote_NPS.jpg'/>";
+        var Gaines = "<img id='frtImg' alt='Fort Gaines' src='img/Fort_Gaines.jpg'/>";
+        var Jackson = "<img id='frtImg' alt='Fort Jackson' src='img/Fort_Jackson.jpg'/>";
+        var Jameson = "<img id='frtImg' alt='Battery Jameson' src='img/Battery_Jameson.jpg'/>";
+        var Lincoln = "<img id='frtImg' alt='Fort Lincoln' src='img/Fort_Lincoln.jpg'/>";
+        var Lyon = "<img id='frtImg' alt='Fort Lyon' src='img/Fort_Lyon.jpg'/>";
+        var Munson = "<img id='frtImg' alt='Fort Munson' src='img/Fort_Munson.jpg'/>";
+        var Reno = "<img id='frtImg' alt='Fort Reno' src='img/Fort_Reno.jpg'/>";
+        var Richardson = "<img id='frtImg' alt='Fort Richardson' src='img/Fort_Richardson.jpg'/>";
+        var Rodgers = "<img id='frtImg' alt='Battery Rodgers' src='img/Battery_Rodgers.png'/>";
+        var Runyon = "<img id='frtImg' alt='Fort Runyon' src='img/Fort_Runyon.jpg'/>";
+        var Slemmer = "<img id='frtImg' alt='Fort Slemmer' src='img/Fort_Slemmer.jpg'/>";
+        var Slocum = "<img id='frtImg' alt='Fort Slocum' src='img/Fort_Slocum.jpg'/>";
+        var Stevens = "<img id='frtImg' alt='Fort Stevens' src='img/Fort_Stevens.jpg'/>";
+        var Sumner = "<img id='frtImg' alt='Fort Sumner' src='img/Fort_Sumner.jpg'/>";
+        var Totten = "<img id='frtImg' alt='Fort Totten' src='img/Fort_Totten.jpg'/>";
+        var Whipple = "<img id='frtImg' alt='Fort Whipple' src='img/Fort_Whipple.jpg'/>"; 
+        var Woodbury = "<img id='frtImg' alt='Fort Woodbury' src='img/Fort_Woodbury.jpg'/>"; 
+        
+        var image = (
+            results.FT_NAME == 'Fort Albany' ? Albany :
+            results.FT_NAME == 'Fort Bunker Hill' ? BunkerHill :
+            results.FT_NAME == 'Fort DeRussy' ? DeRussy :
+            results.FT_NAME == 'Fort Saratoga' ? Saratoga :
+            results.FT_NAME == 'Fort Thayer' ? Thayer :
+            results.FT_NAME == 'Battery Martin Scott' ? Chain :
+            results.FT_NAME == 'Fort Bayard' ? Bayard :
+            results.FT_NAME == 'Fort C. F. Smith' ? CFSmith :
+            results.FT_NAME == 'Fort Carroll' ? Carroll :
+            results.FT_NAME == 'Fort Corcoran' ? Corcoran :
+            results.FT_NAME == 'Fort Craig' ? Craig :
+            results.FT_NAME == 'Fort Ellsworth' ? Ellsworth :
+            results.FT_NAME == 'Fort Foote' ? Foote :
+            results.FT_NAME == 'Fort Gaines' ? Gaines :
+            results.FT_NAME == 'Fort Jackson' ? Jackson :
+            results.FT_NAME == 'Battery Jameson' ? Jameson :
+            results.FT_NAME == 'Fort Lincoln' ? Lincoln :
+            results.FT_NAME == 'Fort Lyon' ? Lyon :
+            results.FT_NAME == 'Fort Munson' ? Munson :
+            results.FT_NAME == 'Fort Reno' ? Reno :
+            results.FT_NAME == 'Fort Richardson' ? Richardson :
+            results.FT_NAME == 'Battery Rodgers' ? Rodgers :
+            results.FT_NAME == 'Fort Runyon' ? Runyon :
+            results.FT_NAME == 'Fort Slemmer' ? Slemmer :
+            results.FT_NAME == 'Fort Slocum' ? Slocum :
+            results.FT_NAME == 'Fort Stevens' ? Stevens :
+            results.FT_NAME == 'Fort Sumner' ? Sumner :
+            results.FT_NAME == 'Fort Totten' ? Totten :
+            results.FT_NAME == 'Fort Whipple' ? Whipple :
+            results.FT_NAME == 'Fort Woodbury' ? Woodbury :
+            ''
+        );
+        
+        var credit = (
+            (results.FT_NAME == 'Battery Martin Scott' || results.FT_NAME == 'Fort Bayard' || results.FT_NAME == 'Fort C. F. Smith' || results.FT_NAME == 'Fort Carroll' || results.FT_NAME == 'Fort Corcoran' || results.FT_NAME == 'Fort Craig' || results.FT_NAME == 'Fort Ellsworth' || results.FT_NAME == 'Fort Gaines' || results.FT_NAME == 'Fort Jackson' || results.FT_NAME == 'Fort Lincoln' || results.FT_NAME == 'Fort Lyon' || results.FT_NAME == 'Fort Munson' || results.FT_NAME == 'Fort Reno' || results.FT_NAME == 'Fort Richardson' || results.FT_NAME == 'Battery Rodgers' || results.FT_NAME == 'Fort Runyon' || results.FT_NAME == 'Fort Slemmer' || results.FT_NAME == 'Fort Slocum' || results.FT_NAME == 'Fort Stevens' || results.FT_NAME == 'Fort Sumner' || results.FT_NAME == 'Fort Totten' || results.FT_NAME == 'Fort Whipple' || results.FT_NAME == 'Fort Woodbury' || results.FT_NAME == 'Fort Albany' ||
+            results.FT_NAME == 'Fort Bunker Hill' || results.FT_NAME == 'Fort DeRussy' || results.FT_NAME == 'Fort Saratoga' || results.FT_NAME == 'Fort Thayer' || results.FT_NAME == 'Battery Jameson') ? "<b>Image credit:</b> Library of Congress" :
+            results.FT_NAME == 'Fort Foote' ? "<b>Image credit:</b> National Park Service" :
+            ''
+        );
+        
+        var armsTotalNum = results.c6lbJam + results.c6lbField + results.c10lbParr + results.c12lbField + results.c12lbHow + results.c12lbJam + results.c12lbHvy + results.c12lbNap + results.c20lbParr + results.c24lbBarb + results.mCoMort +results.c24lbParr + results.c24lbHow + results.c24lbSiege + results.c30lbParr + results.c32lbBarb + results.c32lbSea + results.c32lbHow + results.c32lbParr + results.c42lbJam + results.c100lbParr + results.c200lbParr + results.c4inRif + results.c45inOrd + results.c5inSiege + results.c8inHow + results.m8inMort + results.c10inMort + results.c15inRdm;
+        
+        var fullDetails = "<div id='popupContainer'><span id='fortPic'>" + image + "</span><h5>" + credit + "</h5><h2>" + results.FT_NAME + "</h2><h3><b>Type:</b> " + results.Fort + "</h3><h3><b>Year Constructed:</b> " + results.YrBuilt + "</h3><hr><h3><b>Commanding Officer:</b> " + results.Comm + "</h3><h3><b>Garrison:</b> " + results.Garr + "</h3><h3><b>Armaments:</b> " + results.Arms + results.ArmsTwo + "( <b>" + armsTotalNum + " Total Guns</b> )</h3><h3><b>Range Info:</b> Of the guns at " + results.FT_NAME + ", the " + results.Lng_Range + " had the longest range at <b>" + results.Rng_Meters + " meters</b> (5° elevation).</h3><table><tbody><tr><td><label class='switch'><input type='checkbox' id='popupButton'><span class='slider round'></span></label></td><td><h3 id='switchText' class='switch'>Show <b>" + results.Lng_Range + "</b> maximum range</h3></td></tr></tbody></table><h3><b>Notes:</b> " + results.Notes + results.NotesTwo + "</h3><div class='chart'></div><h4><b>Information Source:</b><a href='https://www.nps.gov/parkhistory/online_books/civilwar/hrsa1-e.htm' target='_blank'> " + results.Source + "</a></h4></div>";
+                
+        var someDetails = "<div id='popupContainer'><span>" + image + "</span><h5>" + credit + "</h5><h2>" + results.FT_NAME + "</h2><h3><b>Type:</b> " + results.Fort + "</h3><h3><b>Year Constructed:</b> " + results.YrBuilt + "</h3><hr><h3><b>Notes:</b> " + results.Notes + results.NotesTwo + "</h3></div>";
+        
+        var zeroDetails = "<div id='popupContainer'><h2>" + results.FT_NAME + "</h2><h3><b>Type:</b> " + results.Fort + "</h3><h3><b>Year Constructed:</b> Unknown</h3><hr><h3><b>Notes:</b> Additional details about this fortified position are not known at this time.</h3></div>";
+                
+        var popupChoice = (
+            results.Comm === ' ' && results.YrBuilt != 0 ? someDetails :
+            results.Comm === ' ' && results.YrBuilt === 0 ? zeroDetails :
+            fullDetails
+        );
+        
+        var popupElement = document.getElementById("sidebarDiv");
+                
+        popupElement.innerHTML = popupChoice;
+        
+        //Range SWITCH CODE///
+        
+        var rangeId = results.FID_12;
+        
+        $('#popupButton').change(function(){
+            if ($(this).is(':checked')) {
+                rangeBuff.visible = true;
+                rangeBuff.definitionExpression = "FID_12 = " + rangeId;
+                $("#switchText").html("Hide <b>" + results.Lng_Range + "</b> maximum range");
+            } else {
+                //rangeBuff.definitionExpression = "FID_12 = 1000";
+                rangeBuff.visible = false;
+                $("#switchText").html("Show <b>" + results.Lng_Range + "</b> maximum range");
+            }
+        });
+        
+        //Chart Data and Labels//
+        
+        let arms = [
+            {name: "6lb James Rifled", number: results.c6lbJam}, 
+            {name: "6lb Field Gun", number: results.c6lbField}, 
+            {name: "10lb Parrott", number: results.c10lbParr}, 
+            {name: "12lb Field Gun", number: results.c12lbField}, 
+            {name: "12lb Howitzer", number: results.c12lbHow}, 
+            {name: "12lb James Rifled", number: results.c12lbJam}, 
+            {name: "12lb Heavy Gun", number: results.c12lbHvy}, 
+            {name: "12lb Napoleon", number: results.c12lbNap}, 
+            {name: "20lb Parrott", number: results.c20lbParr}, 
+            {name: "24lb Barbette", number: results.c24lbBarb}, 
+            {name: "24lb Coehorn Mortar", number:results.mCoMort}, 
+            {name: "24lb Parrott", number: results.c24lbParr}, 
+            {name: "24lb Howitzer", number: results.c24lbHow}, 
+            {name: "24lb Siege Gun", number: results.c24lbSiege}, 
+            {name: "30lb Parrott", number: results.c30lbParr}, 
+            {name: "32lb Barbette", number: results.c32lbBarb}, 
+            {name: "32lb Sea Coast", number: results.c32lbSea}, 
+            {name: "32lb Howitzer", number: results.c32lbHow}, 
+            {name: "32lb Parrott", number: results.c32lbParr}, 
+            {name: "42lb James Rifled", number: results.c42lbJam}, 
+            {name: "100lb Parrott", number: results.c100lbParr}, 
+            {name: "200lb Parrott", number: results.c200lbParr}, 
+            {name: "4 inch Rifle", number: results.c4inRif}, 
+            {name: "4-5 inch Ord.", number: results.c45inOrd}, 
+            {name: "5 inch Siege Gun", number: results.c5inSiege}, 
+            {name: "8 inch Howitzer", number: results.c8inHow}, 
+            {name: "8 inch Mortar", number: results.m8inMort}, 
+            {name: "10 inch Mortar", number: results.c10inMort}, 
+            {name: "15 inch Rodmanr", number: results.c15inRdm}
+        ];
+
+        let armsCount = arms.filter(arms => arms.number > 0);
+        
+        var armsNumber = armsCount.map(a => a.number);
+        var armsName = armsCount.map(a => a.name);
+        
+        var fortName = results.FT_NAME;
+        
+        //Start Chart
+        
+        var canvas = document.createElement("canvas");
+
+        var data = {
+          labels: armsName,       
+          datasets:[
+            {
+              label: "Number:",
+              data: armsNumber, 
+              //data: arms.filter(checkArms),  
+              backgroundColor: 'rgba(186, 169, 169, 0.6)',
+              borderColor: 'rgba(110, 100, 76, 1)',
+              borderWidth: .5,
+              hoverBorderWidth: 1,
+              hoverBackgroundColor: 'rgba(186, 169, 169, 0.8)',
+            },
+          ],
+          };
+
+          var options = {
+            responsive: true,
+            maintainAspectRatio: false,
+            legend: {
+                display: false
+            },
+            title: {
+                display: true,
+                text: 'Type and Number of Guns at ' + fortName + ' (May 1864)',
+                fontSize: 13,
+            },
+            scales: {
+                xAxes: [{
+                    //stacked: true
+                    ticks: {
+                        fontSize: 12,
+                        fontColor: "#000",
+                        beginAtZero: true
+                    }
+                }],
+                yAxes: [{
+                    //stacked: true,
+                    ticks: {
+                        //beginAtZero: true,
+                        fontSize: 12,
+                        fontColor: "#000",           
+                    }
+                }]
+            },
+            tooltips: {
+                backgroundColor: 'rgba(201, 184, 139, 0.9)',
+                titleFontFamily: "'Raleway'",
+                bodyFontFamily: "'Raleway'",
+                titleFontColor: "#000",
+                bodyFontColor: "#000",
+                cornerRadius: 3,
+                borderWidth: 2,
+                mode: 'index',
+                intersect: false
+            },
+            /*hover: {
+                    onHover: function(e) {
+                        var point = this.getElementAtEvent(e);
+                        if (point.length) e.target.style.cursor = 'pointer';
+                        else e.target.style.cursor = 'default';
+                    }
+            }*/
+        };
+    
+        Chart.Legend.prototype.afterFit = function() {
+            this.height = this.height + 10;
+        };
+
+        Chart.defaults.global.defaultFontFamily="'Raleway'";
+        var mybarChart = new Chart(canvas, {
+          type: "horizontalBar",
+          data: data,
+          options: options,   
+        });
+
+        popupElement.querySelector(".chart").appendChild(canvas); 
+        
+        //End Chart
+                
+        return popupElement;                        
+    };
+
 //***********3d Forts**********//
           
         var fortEdges = {
@@ -550,260 +809,17 @@
             },  
           ],
         };  
-                        
-        var fortsTemplate = {
-            outFields: ["*"],
-              //title: "{name_e}",
-            content: function (feature) {
-                return setContentInfo(feature.graphic.attributes);
-            },    
-        };  
-          
+                                  
         const forts3d = new SceneLayer({                    
             url:"https://tiles.arcgis.com/tiles/CmuSiXApoWtqLYty/arcgis/rest/services/3d_Forts_FINAL_V5/SceneServer",
-            popupEnabled: false,
-            outFields: ["*"],
-            popupTemplate: fortsTemplate,                          
+            popupEnabled: false,                          
             renderer: fort3dYearRenderer,
         });
-                       
-        function setContentInfo(results) {
-            var Albany = "<img id='frtImg' alt='Fort Albany' src='img/Fort_Albany.jpg'/>";
-            var BunkerHill = "<img id='frtImg' alt='Fort Bunkerhill' src='img/Fort_BunkerHill.jpg'/>";
-            var DeRussy = "<img id='frtImg' alt='Fort DeRussy' src='img/Fort_DeRussy.jpg'/>";
-            var Saratoga = "<img id='frtImg' alt='Fort Saratoga' src='img/Fort_Saratoga.jpg'/>";
-            var Thayer = "<img id='frtImg' alt='Fort Thayer' src='img/Fort_Thayer.jpg'/>";
-            var Chain = "<img id='frtImg' alt='Battery Martin Scott / Chain Bridge Battery' src='img/Chain_Bridge_Battery.jpg'/>";
-            var Bayard = "<img id='frtImg' alt='Fort Bayard' src='img/Fort_Bayard.jpg'/>";
-            var CFSmith = "<img id='frtImg' alt='Fort C.F. Smith' src='img/Fort_CFSmith.jpg'/>";
-            var Carroll = "<img id='frtImg' alt='Fort Carroll' src='img/Fort_Carroll.jpg'/>";
-            var Corcoran = "<img id='frtImg' alt='Fort Corcoran' src='img/Fort_Corcoran.jpg'/>";
-            var Craig = "<img id='frtImg' alt='Fort Craig' src='img/Fort_Craig.jpg'/>";
-            var Ellsworth = "<img id='frtImg' alt='Fort Ellsworth' src='img/Fort_Ellsworth.jpg'/>";
-            var Foote = "<img id='frtImg' alt='Fort Foote' src='img/Fort_Foote_NPS.jpg'/>";
-            var Gaines = "<img id='frtImg' alt='Fort Gaines' src='img/Fort_Gaines.jpg'/>";
-            var Jackson = "<img id='frtImg' alt='Fort Jackson' src='img/Fort_Jackson.jpg'/>";
-            var Jameson = "<img id='frtImg' alt='Battery Jameson' src='img/Battery_Jameson.jpg'/>";
-            var Lincoln = "<img id='frtImg' alt='Fort Lincoln' src='img/Fort_Lincoln.jpg'/>";
-            var Lyon = "<img id='frtImg' alt='Fort Lyon' src='img/Fort_Lyon.jpg'/>";
-            var Munson = "<img id='frtImg' alt='Fort Munson' src='img/Fort_Munson.jpg'/>";
-            var Reno = "<img id='frtImg' alt='Fort Reno' src='img/Fort_Reno.jpg'/>";
-            var Richardson = "<img id='frtImg' alt='Fort Richardson' src='img/Fort_Richardson.jpg'/>";
-            var Rodgers = "<img id='frtImg' alt='Battery Rodgers' src='img/Battery_Rodgers.png'/>";
-            var Runyon = "<img id='frtImg' alt='Fort Runyon' src='img/Fort_Runyon.jpg'/>";
-            var Slemmer = "<img id='frtImg' alt='Fort Slemmer' src='img/Fort_Slemmer.jpg'/>";
-            var Slocum = "<img id='frtImg' alt='Fort Slocum' src='img/Fort_Slocum.jpg'/>";
-            var Stevens = "<img id='frtImg' alt='Fort Stevens' src='img/Fort_Stevens.jpg'/>";
-            var Sumner = "<img id='frtImg' alt='Fort Sumner' src='img/Fort_Sumner.jpg'/>";
-            var Totten = "<img id='frtImg' alt='Fort Totten' src='img/Fort_Totten.jpg'/>";
-            var Whipple = "<img id='frtImg' alt='Fort Whipple' src='img/Fort_Whipple.jpg'/>"; 
-            var Woodbury = "<img id='frtImg' alt='Fort Woodbury' src='img/Fort_Woodbury.jpg'/>"; 
-            
-            var image = (
-                results.FT_NAME == 'Fort Albany' ? Albany :
-                results.FT_NAME == 'Fort Bunker Hill' ? BunkerHill :
-                results.FT_NAME == 'Fort DeRussy' ? DeRussy :
-                results.FT_NAME == 'Fort Saratoga' ? Saratoga :
-                results.FT_NAME == 'Fort Thayer' ? Thayer :
-                results.FT_NAME == 'Battery Martin Scott' ? Chain :
-                results.FT_NAME == 'Fort Bayard' ? Bayard :
-                results.FT_NAME == 'Fort C. F. Smith' ? CFSmith :
-                results.FT_NAME == 'Fort Carroll' ? Carroll :
-                results.FT_NAME == 'Fort Corcoran' ? Corcoran :
-                results.FT_NAME == 'Fort Craig' ? Craig :
-                results.FT_NAME == 'Fort Ellsworth' ? Ellsworth :
-                results.FT_NAME == 'Fort Foote' ? Foote :
-                results.FT_NAME == 'Fort Gaines' ? Gaines :
-                results.FT_NAME == 'Fort Jackson' ? Jackson :
-                results.FT_NAME == 'Battery Jameson' ? Jameson :
-                results.FT_NAME == 'Fort Lincoln' ? Lincoln :
-                results.FT_NAME == 'Fort Lyon' ? Lyon :
-                results.FT_NAME == 'Fort Munson' ? Munson :
-                results.FT_NAME == 'Fort Reno' ? Reno :
-                results.FT_NAME == 'Fort Richardson' ? Richardson :
-                results.FT_NAME == 'Battery Rodgers' ? Rodgers :
-                results.FT_NAME == 'Fort Runyon' ? Runyon :
-                results.FT_NAME == 'Fort Slemmer' ? Slemmer :
-                results.FT_NAME == 'Fort Slocum' ? Slocum :
-                results.FT_NAME == 'Fort Stevens' ? Stevens :
-                results.FT_NAME == 'Fort Sumner' ? Sumner :
-                results.FT_NAME == 'Fort Totten' ? Totten :
-                results.FT_NAME == 'Fort Whipple' ? Whipple :
-                results.FT_NAME == 'Fort Woodbury' ? Woodbury :
-                ''
-            );
-            
-            var credit = (
-                (results.FT_NAME == 'Battery Martin Scott' || results.FT_NAME == 'Fort Bayard' || results.FT_NAME == 'Fort C. F. Smith' || results.FT_NAME == 'Fort Carroll' || results.FT_NAME == 'Fort Corcoran' || results.FT_NAME == 'Fort Craig' || results.FT_NAME == 'Fort Ellsworth' || results.FT_NAME == 'Fort Gaines' || results.FT_NAME == 'Fort Jackson' || results.FT_NAME == 'Fort Lincoln' || results.FT_NAME == 'Fort Lyon' || results.FT_NAME == 'Fort Munson' || results.FT_NAME == 'Fort Reno' || results.FT_NAME == 'Fort Richardson' || results.FT_NAME == 'Battery Rodgers' || results.FT_NAME == 'Fort Runyon' || results.FT_NAME == 'Fort Slemmer' || results.FT_NAME == 'Fort Slocum' || results.FT_NAME == 'Fort Stevens' || results.FT_NAME == 'Fort Sumner' || results.FT_NAME == 'Fort Totten' || results.FT_NAME == 'Fort Whipple' || results.FT_NAME == 'Fort Woodbury' || results.FT_NAME == 'Fort Albany' ||
-                results.FT_NAME == 'Fort Bunker Hill' || results.FT_NAME == 'Fort DeRussy' || results.FT_NAME == 'Fort Saratoga' || results.FT_NAME == 'Fort Thayer' || results.FT_NAME == 'Battery Jameson') ? "<b>Image credit:</b> Library of Congress" :
-                results.FT_NAME == 'Fort Foote' ? "<b>Image credit:</b> National Park Service" :
-                ''
-            );
-            
-            var armsTotalNum = results.c6lbJam + results.c6lbField + results.c10lbParr + results.c12lbField + results.c12lbHow + results.c12lbJam + results.c12lbHvy + results.c12lbNap + results.c20lbParr + results.c24lbBarb + results.mCoMort +results.c24lbParr + results.c24lbHow + results.c24lbSiege + results.c30lbParr + results.c32lbBarb + results.c32lbSea + results.c32lbHow + results.c32lbParr + results.c42lbJam + results.c100lbParr + results.c200lbParr + results.c4inRif + results.c45inOrd + results.c5inSiege + results.c8inHow + results.m8inMort + results.c10inMort + results.c15inRdm;
-            
-            var fullDetails = "<div id='popupContainer'><span id='fortPic'>" + image + "</span><h5>" + credit + "</h5><h2>" + results.FT_NAME + "</h2><h3><b>Type:</b> " + results.Fort + "</h3><h3><b>Year Constructed:</b> " + results.YrBuilt + "</h3><hr><h3><b>Commanding Officer:</b> " + results.Comm + "</h3><h3><b>Garrison:</b> " + results.Garr + "</h3><h3><b>Armaments:</b> " + results.Arms + results.ArmsTwo + "( <b>" + armsTotalNum + " Total Guns</b> )</h3><h3><b>Range Info:</b> Of the guns at " + results.FT_NAME + ", the " + results.Lng_Range + " had the longest range at <b>" + results.Rng_Meters + " meters</b> (5° elevation).</h3><table><tbody><tr><td><label class='switch'><input type='checkbox' id='popupButton'><span class='slider round'></span></label></td><td><h3 id='switchText' class='switch'>Show <b>" + results.Lng_Range + "</b> maximum range</h3></td></tr></tbody></table><h3><b>Notes:</b> " + results.Notes + results.NotesTwo + "</h3><div class='chart'></div><h4><b>Information Source:</b><a href='https://www.nps.gov/parkhistory/online_books/civilwar/hrsa1-e.htm' target='_blank'> " + results.Source + "</a></h4></div>";
-                    
-            var someDetails = "<div id='popupContainer'><span>" + image + "</span><h5>" + credit + "</h5><h2>" + results.FT_NAME + "</h2><h3><b>Type:</b> " + results.Fort + "</h3><h3><b>Year Constructed:</b> " + results.YrBuilt + "</h3><hr><h3><b>Notes:</b> " + results.Notes + results.NotesTwo + "</h3></div>";
-            
-            var zeroDetails = "<div id='popupContainer'><h2>" + results.FT_NAME + "</h2><h3><b>Type:</b> " + results.Fort + "</h3><h3><b>Year Constructed:</b> Unknown</h3><hr><h3><b>Notes:</b> Additional details about this fortified position are not known at this time.</h3></div>";
-                    
-            var popupChoice = (
-                results.Comm === ' ' && results.YrBuilt != 0 ? someDetails :
-                results.Comm === ' ' && results.YrBuilt === 0 ? zeroDetails :
-                fullDetails
-            );
-            
-            var popupElement = document.getElementById("sidebarDiv");
-                    
-            popupElement.innerHTML = popupChoice;
-            
-            //Range SWITCH CODE///
-            
-            var rangeId = results.FID_12;
-            
-            $('#popupButton').change(function(){
-                if ($(this).is(':checked')) {
-                    rangeBuff.visible = true;
-                    rangeBuff.definitionExpression = "FID_12 = " + rangeId;
-                    $("#switchText").html("Hide <b>" + results.Lng_Range + "</b> maximum range");
-                } else {
-                    //rangeBuff.definitionExpression = "FID_12 = 1000";
-                    rangeBuff.visible = false;
-                    $("#switchText").html("Show <b>" + results.Lng_Range + "</b> maximum range");
-                }
-            });
-            
-            //Chart Data and Labels//
-            
-            let arms = [
-                {name: "6lb James Rifled", number: results.c6lbJam}, 
-                {name: "6lb Field Gun", number: results.c6lbField}, 
-                {name: "10lb Parrott", number: results.c10lbParr}, 
-                {name: "12lb Field Gun", number: results.c12lbField}, 
-                {name: "12lb Howitzer", number: results.c12lbHow}, 
-                {name: "12lb James Rifled", number: results.c12lbJam}, 
-                {name: "12lb Heavy Gun", number: results.c12lbHvy}, 
-                {name: "12lb Napoleon", number: results.c12lbNap}, 
-                {name: "20lb Parrott", number: results.c20lbParr}, 
-                {name: "24lb Barbette", number: results.c24lbBarb}, 
-                {name: "24lb Coehorn Mortar", number:results.mCoMort}, 
-                {name: "24lb Parrott", number: results.c24lbParr}, 
-                {name: "24lb Howitzer", number: results.c24lbHow}, 
-                {name: "24lb Siege Gun", number: results.c24lbSiege}, 
-                {name: "30lb Parrott", number: results.c30lbParr}, 
-                {name: "32lb Barbette", number: results.c32lbBarb}, 
-                {name: "32lb Sea Coast", number: results.c32lbSea}, 
-                {name: "32lb Howitzer", number: results.c32lbHow}, 
-                {name: "32lb Parrott", number: results.c32lbParr}, 
-                {name: "42lb James Rifled", number: results.c42lbJam}, 
-                {name: "100lb Parrott", number: results.c100lbParr}, 
-                {name: "200lb Parrott", number: results.c200lbParr}, 
-                {name: "4 inch Rifle", number: results.c4inRif}, 
-                {name: "4-5 inch Ord.", number: results.c45inOrd}, 
-                {name: "5 inch Siege Gun", number: results.c5inSiege}, 
-                {name: "8 inch Howitzer", number: results.c8inHow}, 
-                {name: "8 inch Mortar", number: results.m8inMort}, 
-                {name: "10 inch Mortar", number: results.c10inMort}, 
-                {name: "15 inch Rodmanr", number: results.c15inRdm}
-            ];
-
-            let armsCount = arms.filter(arms => arms.number > 0);
-            
-            var armsNumber = armsCount.map(a => a.number);
-            var armsName = armsCount.map(a => a.name);
-            
-            var fortName = results.FT_NAME;
-            
-            //Start Chart
-            
-            var canvas = document.createElement("canvas");
-
-            var data = {
-              labels: armsName,       
-              datasets:[
-                {
-                  label: "Number:",
-                  data: armsNumber, 
-                  //data: arms.filter(checkArms),  
-                  backgroundColor: 'rgba(168, 154, 118, 0.6)',
-                  borderColor: 'rgba(110, 100, 76, 1)',
-                  borderWidth: .5,
-                  hoverBorderWidth: 1,
-                  hoverBackgroundColor: 'rgba(168, 154, 118, 0.8)',
-                },
-              ],
-              };
-
-              var options = {
-                responsive: true,
-                maintainAspectRatio: false,
-                legend: {
-                    display: false
-                },
-                title: {
-                    display: true,
-                    text: 'Type and Number of Guns at ' + fortName + ' (May 1864)',
-                    fontSize: 13,
-                },
-                scales: {
-                    xAxes: [{
-                        //stacked: true
-                        ticks: {
-                            fontSize: 12,
-                            fontColor: "#000",
-                            beginAtZero: true
-                        }
-                    }],
-                    yAxes: [{
-                        //stacked: true,
-                        ticks: {
-                            //beginAtZero: true,
-                            fontSize: 12,
-                            fontColor: "#000",           
-                        }
-                    }]
-                },
-                tooltips: {
-                    backgroundColor: 'rgba(201, 184, 139, 0.9)',
-                    titleFontFamily: "'Raleway'",
-                    bodyFontFamily: "'Raleway'",
-                    titleFontColor: "#000",
-                    bodyFontColor: "#000",
-                    mode: 'index',
-                    intersect: false
-                },
-                /*hover: {
-                        onHover: function(e) {
-                            var point = this.getElementAtEvent(e);
-                            if (point.length) e.target.style.cursor = 'pointer';
-                            else e.target.style.cursor = 'default';
-                        }
-                }*/
-            };
-        
-            Chart.Legend.prototype.afterFit = function() {
-                this.height = this.height + 10;
-            };
-
-            Chart.defaults.global.defaultFontFamily="'Raleway'";
-            var mybarChart = new Chart(canvas, {
-              type: "horizontalBar",
-              data: data,
-              options: options,   
-            });
-
-            popupElement.querySelector(".chart").appendChild(canvas); 
-            
-            //End Chart
-                    
-            return popupElement;                        
-        };  
-            
+                                   
 //***********Set Scene**********//
           
        var webscene = new WebScene({
-            layers: [ dc2020, dc1865, waterLayer, trenchBack, trench, fortBattOutline, battery, fort, areaBounds, rangeBuff, forts3d, washMonFin, washMonUnFin, monLabel ],
+            layers: [ dc2020, dc1865, waterLayer, trenchBack, fortBattOutline, trench, battery, fort, areaBounds, rangeBuff, fortsFootprint, forts3d, washMonFin, washMonUnFin, monLabel ],
             ground: {
                 layers: [new ExaggeratedElevationLayer()]
             }
@@ -837,7 +853,11 @@
             background:{
                 type: "color", 
                 color: [0, 0, 0, 0]
-            }, 
+            },
+            lighting: {
+              directShadowsEnabled: true,
+              date: new Date("Sun Mar 15 1865 09:00:00 GMT-0600 (CET)")    
+            },
             atmosphereEnabled: false,
             starsEnabled: false
           },
@@ -846,12 +866,12 @@
           },    
           camera: {
             position: {
-              latitude: 38.6083,   
-              longitude: -77.1374,    
-              z: 41122
+              latitude: 38.6735,   
+              longitude: -77.1848,    
+              z: 21623.4
             },
-            tilt: 34.69,
-            heading: 13.99
+            tilt: 47.76,
+            heading: 24.61
           },
           constraints: {
               altitude: {
@@ -865,9 +885,9 @@
             }    
         });
           
-        view.popup.viewModel.actions = false;  
+        view.popup.viewModel.actions = false; 
         
-        /*view.watch('camera.tilt', function(newValue, oldValue, property, object) {
+        view.watch('camera.tilt', function(newValue, oldValue, property, object) {
           console.log(property , newValue);
         });
           
@@ -877,14 +897,14 @@
           
         view.watch('camera.heading', function(newValue, oldValue, property, object) {
           console.log(property , newValue);
-        });*/ 
+        });
 
 //********Send popup contents to sidebar*********//   
         
         view.when().then(function() {
               const graphic = {
                 popupTemplate: {
-                  content: "Test Test Test"
+                  content: ""
                 }
               };
 
@@ -895,7 +915,7 @@
                 spatialReference: view.spatialReference
             });    
 
-            view.whenLayerView(forts3d).then(function(layerView) {
+            view.whenLayerView(fortsFootprint).then(function(layerView) {
                 let highlight;
                 view.on("click", function(event) {   
                   view.hitTest(event).then(function(event) {
@@ -923,9 +943,18 @@
                         $("#infoButton").click(function(){
                             highlight.remove(result.graphic);
                         })
-                    })  
+                    });
+                    addSearch.clear();
                   });
-                });  
+                });
+                addSearch.on("select-result", function (event) {
+                  let result = event.result.feature;      
+
+                  view.hitTest(event).then(function () {
+                    feature.graphic = result;
+                    highlight.remove(result.graphic);    
+                  });
+                });                  
             });
         }); 
         
@@ -983,6 +1012,25 @@
 var addSearch = new Search({
   view: view,
   includeDefaultSources: false,
+  locationEnabled: false,
+  maxSuggestions: 20,
+  sources: [
+      {
+          layer: fortsFootprint,
+          searchFields: ["FT_NAME"],
+          displayField: "FT_NAME",
+          exactMatch: false,
+          placeholder: "Enter a fort name",
+          name: "Enter a fort name"
+      }
+    ],
+    container: "addSearch",
+    popupEnabled: false,
+}); 
+
+/*var addSearch = new Search({
+  view: view,
+  includeDefaultSources: false,
   container: "addSearch",
   popupEnabled: false,   
   locationEnabled: false,   
@@ -1033,7 +1081,7 @@ var addSearch = new Search({
         }   
     }  
   ]
-});
+});*/
 
 //***********DC1865 On/Off**********//          
         
@@ -1111,7 +1159,6 @@ var addSearch = new Search({
           this.alt == 'Fort Foote' ? "Image credit: National Park Service" :
           ''
         );
-
           captionText.innerHTML = `${this.alt}  |  ${imgCredit}`;
         });
 
@@ -1121,6 +1168,10 @@ var addSearch = new Search({
           modal.style.display = "none";
         }
         
+        modal.onclick = function() {
+          modal.style.display = "none";
+        }
+
 //*****************Splash Screen***************//
         
         $(document).ready(function(){
@@ -1132,15 +1183,22 @@ var addSearch = new Search({
 //***************Open/Close Menu Button*************//
 
       $(".toggle").click(function() {
-        addSearch.clear();
+        //addSearch.clear();
         $(".toggle").toggleClass('toggle-clicked');
         $(".sidebarTop").toggleClass('sidebarTop-clicked');
         $(".sidebarBottom").toggleClass('sidebarBottom-clicked');
       });
+
+
+    addSearch.on("search-clear", function(event) {
+      document.getElementById("sidebarDiv").innerHTML = "<div class='banner'><div class='line'><span class='fancy'>Select a Fort</span></div><div class='line'><span class='fancySmall'>And</span></div><div class='line'><span class='fancy'>Start Exploring</span></div></div>";
+    });
+      
+/**********End Edits**********/
 
 });
 
 
 
         
-    
+ 

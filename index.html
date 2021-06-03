@@ -3,6 +3,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="initial-scale=1,maximum-scale=1"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <meta property="og:title" content="Defenders of the Union">
+    <meta property="og:description" content="Explore the Civil War fortifications of Washington DC with this 3D web mapping application.">
+    <meta property="og:image" content="img/DC_Forts_Social.PNG">
+    <meta name="author" content="Daniel H. Watts"/>
+    <meta property="og:url" content="https://dwatts.github.io/DCForts/">
+    <meta name="twitter:card" content="img/DC_Forts_Social.PNG">
       
 <title>Defenders of the Union</title>
 
@@ -17,7 +24,7 @@
 
   <body>
     
-    <div id="viewDiv"></div>  
+     
       
     <!-- Start Splash-->  
 
@@ -27,24 +34,26 @@
             <div class="popSubText">Mapping the Civil War Forts of Washington DC</div>    
 
             <div class="container">
-                <div class="item-1"> <div class="popPara">During the Civil War, Washington DC was one of the most heavily fortified cities in the world. Surrounded by a ring of over sixty forts and almost one hundred batteries the seat of the federal government set out to defend itself from assault by Confederate forces. This application was designed to provide an immersive and interactive way to understand the defences of the national capital from both the perspective of the Civil War-era and the present day.</div><hr class="popHr"></div>
+                <div class="item-1"> <div class="popPara">During the Civil War, Washington DC was one of the most heavily fortified cities in the world. Surrounded by a ring of over sixty forts and almost one hundred batteries, the seat of the federal government devised a way to defend itself from assault by Confederate forces. This application was created to provide an immersive and interactive way to understand the defences of the national capital from both the perspective of the Civil War-era and the present day.</div><hr class="popHr"></div>
                 
                 <div class="item-image"><img class="mapThumb" src="img/DC_1865.png"></div>
                 <div class="item-image"><img class="fortThumb" src="img/Frt.svg"></div>
                 <div class="item-image"><img class="menuThumb" src="img/DC_2021.png"></div>                
                 <div class="item-top"><div class="titleSplashText">The Embattled Capital</div></div>
-                <div class="item-top"><div class="titleSplashText">Explore a Fort</div></div>
+                <div class="item-top"><div class="titleSplashText">Explore Every Fort</div></div>
                 <div class="item-top"><div class="titleSplashText">The Forts Today</div></div>
-                <div class="item-text"><div class="othSplashText">Explore the fortifications of Civil War-era Washington DC that were the capital's primary defense during the American Civil War of 1861 - 1865.</div></div>
-                <div class="item-text"><div class="othSplashText">Zoom in and click on individual fortifications to see pictures, details on armaments, garrisons and gun ranges.</div></div>
-                <div class="item-text"><div class="othSplashText">Access map tools menu and turn the 1865 base map on and off to see the capital's fortifications in the context of present-day DC and the metropolitan region.</div></div>
+                <div class="item-text"><div class="othSplashText">Explore the fortifications of Civil War-era Washington DC that were the capital's primary defense against attack during the American Civil War of 1861 - 1865.</div></div>
+                <div class="item-text"><div class="othSplashText"><strong>Zoom in</strong> and <strong>click</strong> on individual fortifications to see pictures, details on armaments, garrisons and gun ranges.</div></div>
+                <div class="item-text"><div class="othSplashText">Access map tools to search for individual forts. Turn the 1865 base map on and off to see the capital's fortifications in the context of present-day DC and the metropolitan region.</div></div>
               </div>
 
-            <button id="closeButton">Close</button>    
+            <button id="closeButton">Explore Now</button>    
         </div>
          <div class="creditPopText"><b>Map Credit: </b>Topographical map, 1st Brigade, defenses north of Potomac, Washington, D.C. loc.gov</div>
     </div>  
-      
+    
+    <div id="viewDiv"></div> 
+
     <!--End Splash-->  
       
     <div class="titleText">Defenders of the Union</div>
@@ -85,7 +94,7 @@
                 </div>
             </div>
             <div class="labelContainer">
-                <h2 class="slidertext">Find a present-day address</h2>
+                <h2 class="slidertext">Find a Fort</h2>
             </div>    
             <div id="addSearch"></div>
             
