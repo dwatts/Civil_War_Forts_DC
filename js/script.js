@@ -853,6 +853,7 @@
                 rangeBuff.definitionExpression = "FID_12 = 1000";  
                 if (result) {
                   feature.graphic = result.graphic;
+                  addSearch.clear();
                   buffId = result.FID_12;
                   highlight = layerView.highlight(result.graphic);
                   $("#infoButton").removeClass('esri-icon-question-clicked');    
