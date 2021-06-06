@@ -5,16 +5,22 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
     <meta property="og:title" content="Defenders of the Union">
-    <meta property="og:description" content="Explore the Civil War fortifications of Washington DC with this 3D web mapping application.">
+    <meta property="og:description" content="Explore the Civil War fortifications of Washington, DC, Northern Virginia and Maryland with this 3D web mapping application. Learn about the fortification through images and information on garrisons, armaments and even gun ranges.">
     <meta property="og:image" content="img/DC_Forts_Social.PNG">
     <meta name="author" content="Daniel H. Watts"/>
     <meta property="og:url" content="https://dwatts.github.io/DCForts/">
+    
     <meta name="twitter:card" content="img/DC_Forts_Social.PNG">
+    <meta name="twitter:title" content="Defenders of the Union"/>
+    <meta name="twitter:description" content="Explore the Civil War fortifications of Washington, DC, Northern Virginia and Maryland with this 3D web mapping application. Learn about the fortification through images and information on garrisons, armaments and even gun ranges."/>
+    <meta name="twitter:site" content="@daytchw"/>
+    <meta name="twitter:image" content="img/DC_Forts_Social.png"/>
+    <meta name="twitter:creator" content="@ydaytchw"/>
       
 <title>Defenders of the Union</title>
 
     <link rel="stylesheet" href="css/style.css"/> 
-    <link rel="stylesheet" href="https://js.arcgis.com/4.18/esri/themes/light/main.css" />
+    <link rel="stylesheet" href="https://js.arcgis.com/4.19/esri/themes/light/main.css" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.css" rel="stylesheet"/>  
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Charmonman:wght@700&display=swap" rel="stylesheet"> 
@@ -24,32 +30,40 @@
 
   <body>
     
-     
-      
+    <!-- Mobile Warning -->
+    
+    <div id="mobileWarning">
+        <div class="warningBox">
+            <h1 class="warningText">Please view on a larger device</h1> 
+            <hr class="warningLine">
+            <h1 class="warningText">Mobile friendly version in development</h1>
+        </div>
+    </div>  
+
     <!-- Start Splash-->  
 
     <div class="splashBack">
         <div class="popupContainer">
             <div class="popText">Defenders of the Union</div>
-            <div class="popSubText">Mapping the Civil War Forts of Washington DC</div>    
+            <div class="popSubText">Mapping the Civil War Forts of Washington, DC</div>    
 
             <div class="container">
-                <div class="item-1"> <div class="popPara">During the Civil War, Washington DC was one of the most heavily fortified cities in the world. Surrounded by a ring of over sixty forts and almost one hundred batteries, the seat of the federal government devised a way to defend itself from assault by Confederate forces. This application was created to provide an immersive and interactive way to understand the defences of the national capital from both the perspective of the Civil War-era and the present day.</div><hr class="popHr"></div>
+                <div class="item-1"> <div class="popPara">During the Civil War, Washington, DC was one of the most heavily fortified cities in the world. Surrounded by a ring of over sixty forts and almost one hundred batteries, the national capital defended itself from assault by Confederate forces. This application was created to provide an immersive and interactive way to understand the defences of the Washington, DC from  the perspective of the both Civil War-era and the present day.</div><hr class="popHr"></div>
                 
-                <div class="item-image"><img class="mapThumb" src="img/DC_1865.png"></div>
+                <div class="item-image"><img class="menuThumb" src="img/DC_1865.png"></div>
                 <div class="item-image"><img class="fortThumb" src="img/Frt.svg"></div>
                 <div class="item-image"><img class="menuThumb" src="img/DC_2021.png"></div>                
                 <div class="item-top"><div class="titleSplashText">The Embattled Capital</div></div>
                 <div class="item-top"><div class="titleSplashText">Explore Every Fort</div></div>
                 <div class="item-top"><div class="titleSplashText">The Forts Today</div></div>
-                <div class="item-text"><div class="othSplashText">Explore the fortifications of Civil War-era Washington DC that were the capital's primary defense against attack during the American Civil War of 1861 - 1865.</div></div>
-                <div class="item-text"><div class="othSplashText"><strong>Zoom in</strong> and <strong>click</strong> on individual fortifications to see pictures, details on armaments, garrisons and gun ranges.</div></div>
-                <div class="item-text"><div class="othSplashText">Access map tools to search for individual forts. Turn the 1865 base map on and off to see the capital's fortifications in the context of present-day DC and the metropolitan region.</div></div>
+                <div class="item-text"><div class="othSplashText"><b>Explore</b> the defenses of Civil War-era Washington, DC that protected the capital from assault between 1861-1865.</div></div>
+                <div class="item-text"><div class="othSplashText"><strong>Zoom in</strong> and <strong>click</strong> on individual fortifications to see pictures and details on armaments, garrisons and gun ranges.</div></div>
+                <div class="item-text"><div class="othSplashText"><strong>Access map tools</strong> to search for individual forts and see the defenses in the context of present-day capital region.</div></div>
               </div>
 
-            <button id="closeButton">Explore Now</button>    
+            <button id="closeButton">Go To Map</button>    
         </div>
-         <div class="creditPopText"><b>Map Credit: </b>Topographical map, 1st Brigade, defenses north of Potomac, Washington, D.C. loc.gov</div>
+         <div class="creditPopText"><b>Image Credit: <a class="splashLink" href="https://www.loc.gov/item/88690656/" target='_blank'></b>Topographical map, 1st Brigade, defenses north of Potomac, Washington, D.C. loc.gov</a></div>
     </div>  
     
     <div id="viewDiv"></div> 
@@ -57,7 +71,7 @@
     <!--End Splash-->  
       
     <div class="titleText">Defenders of the Union</div>
-    <div class="subtitleText">Mapping the Civil War Forts of Washington DC</div>
+    <div class="subtitleText">Mapping the Civil War Forts of Washington, DC</div>
     
     <div id="sideNav">
       <div class="sidebarTop">          
@@ -89,19 +103,23 @@
                 </div>    
 
                 <div class="sliderHolder">
-                    <div class="range-slider"><input id="opacSlider" class="input-range" type="range" value="50" min="1" max="100"><span id="rangeValue" class="range-value"></span></div>
-                    <button type="button" id="opacButton">Reset</button>
+                    <div class="range-slider"><input id="opacSlider" class="input-range" type="range" value="99" min="1" max="100"><span id="rangeValue" class="range-value"></span></div>
+                    <button title="Reset opacity" type="button" id="opacButton">Reset</button>
                 </div>
             </div>
             <div class="labelContainer">
-                <h2 class="slidertext">Find a Fort</h2>
+                <h2 class="slidertext"><b class="heavy">Fort Search</b></h2>
             </div>    
             <div id="addSearch"></div>
             
-            <span id="legend" class="legTitle">Fortifications (Year Built)</span>
+            <span id="legend" class="legTitle">Map Legend (Year Built)</span>
 
             <div class="legendContainer">
                 <div id="yearLegend">
+                    <div class="fortShape">
+                        <img src="img/Frt_NoDate.svg">
+                        <div class="fortYear">Unknown</div>
+                    </div>
                     <div class="fortShape">
                         <img src="img/Frt_1861.svg">
                         <div class="fortYear">1861</div>
@@ -117,10 +135,6 @@
                     <div class="fortShape">
                         <img src="img/Frt_1864.svg">
                         <div class="fortYear">1864</div>
-                    </div>
-                    <div class="fortShape">
-                        <img src="img/Frt_NoDate.svg">
-                        <div class="fortYear">Unknown</div>
                     </div>
                 </div>
                 <div class="vl"></div>
@@ -154,7 +168,7 @@
                     <span></span>
             </label>
         </div>
-          
+
     <!-- Modal Image -->
 
     <div id="myModal" class="modal">
@@ -166,8 +180,9 @@
     </div>  
       
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>   
-    <script src="https://js.arcgis.com/4.18/"></script> 
+    <script src="https://js.arcgis.com/4.19/"></script> 
     <script src="js/script.js"></script>
+    <script src="js/renderers.js"></script>
        
   </body>
 </html>

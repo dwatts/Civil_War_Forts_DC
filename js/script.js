@@ -1,4 +1,3 @@
-
     const dojoOptions = {
       dojoConfig: {
         async: true,
@@ -38,12 +37,7 @@
         "dojo/domReady!",
           
       ], function(WebScene, SceneView, Feature, FeatureLayer, Graphic, ElevationLayer, BaseElevationLayer, Home, Zoom, TileLayer, VectorTileLayer, SceneLayer, PolygonSymbol3D, ExtrudeSymbol3DLayer, SimpleRenderer, Legend, Point, Search, Locator, Polygon, watchUtils, Chart) {
-
-
-//***********Initiate Splash Modal**********//       
-        
- 
-        
+  
 //***********Exaggerate Elevation x 2**********//          
           
         var ExaggeratedElevationLayer = BaseElevationLayer.createSubclass({
@@ -139,7 +133,7 @@
                     family: "Roboto Mono"
                   },
                       
-                  size: 8,   
+                  size: 9,   
                 }],
               } 
             }]
@@ -192,6 +186,7 @@
           renderer: waterRender
         });
            
+
         const fort = new FeatureLayer({
             url: "https://services5.arcgis.com/CmuSiXApoWtqLYty/arcgis/rest/services/DC_Forts/FeatureServer",
             maxScale: 0,
@@ -215,44 +210,7 @@
             },
             popupEnabled: false,
             screenSizePerspectiveEnabled: false,
-            labelingInfo: [{
-              labelPlacement: "above-center",
-              labelExpressionInfo: {
-                value: "{FT_NAME}"
-              },
-              symbol: {
-                type: "label-3d",
-                symbolLayers: [{
-                  type: "text",
-                      
-                  material: {
-                    color: [0, 0, 0]
-                  },
-                  halo: {
-                    color: [255, 255, 255, 0.8],
-                    size: 1
-                  },
-                  font: {
-                    weight: "bold",
-                    family: "Raleway"
-                  },
-                  size: 8,   
-                }],
-                verticalOffset: {
-                  screenLength: 60,
-                  maxWorldLength: 700,
-                  minWorldLength: 20
-                },
-                callout: {
-                  type: "line",
-                  size: 1,
-                  color: [0, 0, 0],
-                  border: {
-                    color: [255, 255, 255, 0]
-                  }
-                }
-              }
-            }]
+            labelingInfo: fortLabelSmall
           });
           
           const battery = new FeatureLayer({
@@ -278,45 +236,7 @@
             },
             popupEnabled: false,
             screenSizePerspectiveEnabled: false,
-            labelingInfo: [{
-              labelPlacement: "above-center",
-              labelExpressionInfo: {
-                value: "{FT_NAME}"
-              },
-              minScale: 15000,
-              symbol: {
-                type: "label-3d",
-                symbolLayers: [{
-                  type: "text",
-                      
-                  material: {
-                    color: [0, 0, 0]
-                  },
-                  halo: {
-                    color: [255, 255, 255, 0.8],
-                    size: 1
-                  },
-                  font: {
-                    weight: "bold",
-                    family: "Raleway"
-                  },
-                  size: 6,   
-                }],
-                verticalOffset: {
-                  screenLength: 30,
-                  maxWorldLength: 500,
-                  minWorldLength: 20
-                },
-                callout: {
-                  type: "line",
-                  size: 1,
-                  color: [0, 0, 0],
-                  border: {
-                    color: [255, 255, 255, 0]
-                  }
-                }
-              }
-            }]
+            labelingInfo: battLabelSmall,
           });
 
         const fortBattOutlineOne = {              
@@ -408,7 +328,7 @@
                   
         const dc1865 = new TileLayer ({
             url: "https://tiles.arcgis.com/tiles/uX5kr9HIx4qXytm9/arcgis/rest/services/DC_1865_Base_Map/MapServer",
-            opacity: 0.7
+            opacity: 0.9
         });
           
         const dc2020 = new VectorTileLayer ({
@@ -488,7 +408,7 @@
         var Thayer = "<img id='frtImg' alt='Fort Thayer' src='img/Fort_Thayer.jpg'/>";
         var Chain = "<img id='frtImg' alt='Battery Martin Scott / Chain Bridge Battery' src='img/Chain_Bridge_Battery.jpg'/>";
         var Bayard = "<img id='frtImg' alt='Fort Bayard' src='img/Fort_Bayard.jpg'/>";
-        var CFSmith = "<img id='frtImg' alt='Fort C.F. Smith' src='img/Fort_CFSmith.jpg'/>";
+        var CFSmith = "<img id='frtImg' alt='Fort C. F. Smith' src='img/Fort_CFSmith.jpg'/>";
         var Carroll = "<img id='frtImg' alt='Fort Carroll' src='img/Fort_Carroll.jpg'/>";
         var Corcoran = "<img id='frtImg' alt='Fort Corcoran' src='img/Fort_Corcoran.jpg'/>";
         var Craig = "<img id='frtImg' alt='Fort Craig' src='img/Fort_Craig.jpg'/>";
@@ -628,7 +548,7 @@
         
         var fortName = results.FT_NAME;
         
-        //Start Chart
+        //Chart Start
         
         var canvas = document.createElement("canvas");
 
@@ -639,11 +559,11 @@
               label: "Number:",
               data: armsNumber, 
               //data: arms.filter(checkArms),  
-              backgroundColor: 'rgba(186, 169, 169, 0.6)',
+              backgroundColor: 'rgba(201,184,139, 0.6)',
               borderColor: 'rgba(110, 100, 76, 1)',
               borderWidth: .5,
               hoverBorderWidth: 1,
-              hoverBackgroundColor: 'rgba(186, 169, 169, 0.8)',
+              hoverBackgroundColor: 'rgba(201,184,139, 0.8)',
             },
           ],
           };
@@ -678,13 +598,15 @@
                 }]
             },
             tooltips: {
-                backgroundColor: 'rgba(201, 184, 139, 0.9)',
+                backgroundColor: 'rgba(207, 207, 207, 0.9)',
                 titleFontFamily: "'Raleway'",
                 bodyFontFamily: "'Raleway'",
                 titleFontColor: "#000",
                 bodyFontColor: "#000",
                 cornerRadius: 3,
-                borderWidth: 2,
+                borderColor: 'rgba(218,218,218, 1)',
+                borderWidth: 1,
+                displayColors: false,
                 mode: 'index',
                 intersect: false
             },
@@ -783,7 +705,7 @@
               {
                 type: "fill", 
                 material: {
-                  color: "#baa9a9" // color for forts with no year data #8e7f7f
+                  color: "#7fcdbb" // Color for forts with no year data #baa9a9
                 },
                 edges: fortEdges  
               }
@@ -875,7 +797,7 @@
           },
           constraints: {
               altitude: {
-                min: 2000,
+                min: 1000,
                 max: 55000,
                 //tilt: 100
               },
@@ -902,61 +824,71 @@
 //********Send popup contents to sidebar*********//   
         
         view.when().then(function() {
-              const graphic = {
-                popupTemplate: {
-                  content: ""
-                }
-              };
+          const graphic = {
+            popupTemplate: {
+              content: ""
+            }
+          };
 
-            const feature = new Feature({
-                container: "feature-node",
-                graphic: graphic,
-                map: view.webscene,
-                spatialReference: view.spatialReference
-            });    
+        const feature = new Feature({
+            container: "feature-node",
+            graphic: graphic,
+            map: view.webscene,
+            spatialReference: view.spatialReference
+        });    
 
-            view.whenLayerView(fortsFootprint).then(function(layerView) {
-                let highlight;
-                view.on("click", function(event) {   
-                  view.hitTest(event).then(function(event) {
-                    let results = event.results.filter(function(result) {
-                      return result.graphic.layer.popupTemplate;
-                    });
-                    let result = results[0]; 
-                    highlight && highlight.remove();
-                    rangeBuff.visible = false;
-                    rangeBuff.definitionExpression = "FID_12 = 1000";  
-                    if (result) {
-                      feature.graphic = result.graphic;
-                      buffId = result.FID_12;
-                      highlight = layerView.highlight(result.graphic);
-                      $("#infoButton").removeClass('esri-icon-question-clicked');    
-                      toggleNum = 1;    
-                    } else { 
-                      document.getElementById("sidebarDiv").innerHTML = "<div class='banner'><div class='line'><span class='fancy'>Select a Fort</span></div><div class='line'><span class='fancySmall'>And</span></div><div class='line'><span class='fancy'>Start Exploring</span></div></div>";
-                      rangeBuff.definitionExpression = "FID_12 = 1000";
-                      rangeBuff.visible = false;
-                      $("#infoButton").removeClass('esri-icon-question-clicked');
-                      toggleNum = 1;
-                    }
-                    $(document).ready(function(){
-                        $("#infoButton").click(function(){
-                            highlight.remove(result.graphic);
-                        })
-                    });
-                    addSearch.clear();
-                  });
+        view.whenLayerView(fortsFootprint).then(function(layerView) {
+            let highlight;
+            view.on("click", function(event) {   
+              view.hitTest(event).then(function(event) {
+                let results = event.results.filter(function(result) {
+                  //start scroll test
+                  document.getElementById("sidebarDiv").scrollTop = 0;
+                  //end scroll test
+                  return result.graphic.layer.popupTemplate;
                 });
-                addSearch.on("select-result", function (event) {
-                  let result = event.result.feature;      
+                let result = results[0]; 
+                highlight && highlight.remove();
+                rangeBuff.visible = false;
+                rangeBuff.definitionExpression = "FID_12 = 1000";  
+                if (result) {
+                  feature.graphic = result.graphic;
+                  buffId = result.FID_12;
+                  highlight = layerView.highlight(result.graphic);
+                  $("#infoButton").removeClass('esri-icon-question-clicked');    
+                  toggleNum = 1;    
+                } else { 
+                  document.getElementById("sidebarDiv").innerHTML = "<div class='banner'><div class='line'><span class='fancy'>Select a Fort</span></div><div class='line'><span class='fancySmall'>And</span></div><div class='line'><span class='fancy'>Start Exploring</span></div></div>";
+                  rangeBuff.definitionExpression = "FID_12 = 1000";
+                  rangeBuff.visible = false;
+                  addSearch.clear();
+                  $("#infoButton").removeClass('esri-icon-question-clicked');
+                  toggleNum = 1;
+                }
+                $(document).ready(function(){
+                    $("#infoButton").click(function(){
+                        highlight.remove(result.graphic);
+                    })
+                });
+                $(document).ready(function () {
+                  $("#fortDropDown").change(function () {
+                    highlight.remove(result.graphic);
+                  })
+                });
+              });
+            });                 
+            //search select start
+            addSearch.on("select-result", function (event) {
+              let result = event.result.feature;      
 
-                  view.hitTest(event).then(function () {
-                    feature.graphic = result;
-                    highlight.remove(result.graphic);    
-                  });
-                });                  
+              view.hitTest(event).then(function () {
+                feature.graphic = result;
+                highlight.remove(result.graphic);    
+              });
             });
-        }); 
+            //search select end
+        });
+    });
         
 //***********Opacity Tools**********//
 
@@ -984,10 +916,10 @@
         $(document).ready(function(){
           $("#opacButton").click(function(){
               dc2020.opacity = 0.1;
-              dc1865.opacity = 0.7;
+              dc1865.opacity = 0.9;
               waterLayer.opacity = 1;
               value.html(range.attr('value') + "%");
-              opacitySlider.value = 50;
+              opacitySlider.value = 99;
           })
          });
         
@@ -1015,17 +947,18 @@ var addSearch = new Search({
   locationEnabled: false,
   maxSuggestions: 20,
   sources: [
-      {
-          layer: fortsFootprint,
-          searchFields: ["FT_NAME"],
-          displayField: "FT_NAME",
-          exactMatch: false,
-          placeholder: "Enter a fort name",
-          name: "Enter a fort name"
-      }
-    ],
-    container: "addSearch",
-    popupEnabled: false,
+    {
+        layer: fortsFootprint,
+        searchFields: ["FT_NAME"],
+        displayField: "FT_NAME",
+        exactMatch: false,
+        placeholder: "Enter a fort name",
+        name: "Enter a fort name",
+    }
+  ],
+  container: "addSearch",
+  popupEnabled: false,
+  
 }); 
 
 /*var addSearch = new Search({
@@ -1091,7 +1024,7 @@ var addSearch = new Search({
                 monLabel.visible = true;
                 waterLayer.visible = true;
                 dc2020.opacity = 0.1;
-                dc1865.opacity = 0.7;
+                dc1865.opacity = 0.9;
                 waterLayer.opacity = 1;
                 washMonFin.visible = false;
                 washMonUnFin.visible = true;
@@ -1107,7 +1040,7 @@ var addSearch = new Search({
                 dc1865.visible = false;
                 monLabel.visible = false;
                 waterLayer.visible = false;
-                dc2020.opacity = 0.7;
+                dc2020.opacity = 0.8;
                 washMonFin.visible = true;
                 washMonUnFin.visible = false;
                 $("#histMap").html("1865 Barnard Map <b class='heavy'>OFF</b>");
@@ -1119,7 +1052,7 @@ var addSearch = new Search({
                 $('.range-slider').css({"opacity":0.4});
                 $('.range-slider').css({'pointer-events': 'none'});
                 value.html(range.attr('value') + "%");
-                opacitySlider.value = 50;
+                opacitySlider.value = 99;
             }
         });
         
@@ -1130,7 +1063,8 @@ var addSearch = new Search({
        $(document).ready(function(){ 
           $("#infoButton").click(function(){
             if (toggleNum == 1) {
-            document.getElementById("sidebarDiv").innerHTML = "<div id='popupContainer'><img id='frtImg' alt='Lincoln Hospital' src='img/Lincoln_Hosp.jpg'><h5><b>Image credit:</b> Library of Congress</h5><h2>About the Map</h2><h3>This application was created in an effort to better understand the ring of fortifications that protected Washington DC from Confederate attacks during the American Civil War of 1861-65. Through an innovative combination of both historic and present day maps, 3D models, images and historic data, this application creates an immersive environment in which to understand the Civil War-era defenses of the nation’s capital.</h3><h3><b>How to Use the Map:</b></h3><h3>On loading, the application presents the user with a view of a heavily fortified Washington, DC in 1865. In a 3D environment, the user can pan and zoom around the District and its immediate environs. Click on individual forts, redoubts and batteries to see images and information on commanding officers, garrisons and armaments at each location. For most fortifications, the user can also turn on the maximum range of the most powerful gun at each place. Adjust the opacity of the 1865 basemap or turn it on and off to see how the fortifications relate to present day Washington, DC, Northern Virginia and Maryland.</h3><h3><b>A Note on Information and Data</b></h3><h3>This process of creating this application began with the acquisition of the 1865 <a href='https://www.loc.gov/resource/g3851s.cw0676000/?r=0.378,0.341,0.207,0.113,0' target='_blank'><i>Map of the environs of Washington : compiled from Boschkes' map of the District of Columbia and from surveys of the U.S. Coast Survey showing the line of the defences of Washington as constructed during the war from 1861 to 1865 inclusive</i></a> from the Library of Congress and its alignment with the geography and elevation data of today. Garrison and armament information for individual forts, including gun ranges, was acquired from the <a href='https://www.nps.gov/parkhistory/online_books/civilwar/hrsa1-e.htm' target='_blank'>National Park Service</a> while images are from the <a href='https://loc.gov/' target='_blank'>Library of Congress</a>. All 1865 map georeferencing, geospatial data - including 3D fort models- and present-day vector tiles were created by the author of this application.</h3><h3>Copyright © 2021 <a href='https://www.danielhwatts.com/' target='_blank'>Daniel H. Watts</a></h3></div>";
+            document.getElementById("sidebarDiv").scrollTop = 0;  
+            document.getElementById("sidebarDiv").innerHTML = "<div id='popupContainer'><img id='frtImg' alt='Lincoln Hospital' src='img/Lincoln_Hosp.jpg'><h5><b>Image credit:</b> Library of Congress</h5><h2>About the Map</h2><h3>This application was created in an effort to better understand the ring of fortifications that protected Washington, DC from Confederate attack during the American Civil War of 1861-65. Through an innovative combination of both historical and present-day maps, 3D models, images and historic data, this application creates an immersive environment in which to understand the Civil War-era defenses of the nation’s capital.</h3><h3><b>How to Use the Map:</b></h3><h3>On loading, the application presents the user with a view of a heavily fortified Washington, DC in 1865. In a 3D environment, the user can pan and zoom around the District and its immediate environs. Click on individual forts, redoubts and batteries to see images and information on commanding officers, garrisons and armaments at each location. For most fortifications, the user can also turn on the maximum range of the most powerful gun at each place. Adjust the opacity of the 1865 basemap or turn it on and off to see how the fortifications relate to present day Washington, DC, Northern Virginia and Maryland.</h3><h3><b>A Note on Information and Data</b></h3><h3>This process of creating this application began with the acquisition of the 1865 <a href='https://www.loc.gov/resource/g3851s.cw0676000/?r=0.378,0.341,0.207,0.113,0' target='_blank'><i>Map of the environs of Washington : compiled from Boschkes' map of the District of Columbia and from surveys of the U.S. Coast Survey showing the line of the defences of Washington as constructed during the war from 1861 to 1865 inclusive</i></a> from the Library of Congress and its alignment with the geography and elevation data of today. Garrison and armament information for individual forts, including gun ranges, was acquired from the <a href='https://www.nps.gov/parkhistory/online_books/civilwar/hrsa1-e.htm' target='_blank'>National Park Service</a> while images are from the <a href='https://loc.gov/' target='_blank'>Library of Congress</a>. All 1865 map georeferencing, geospatial data - including 3D fort models- and present-day vector tiles were created by the author of this application.</h3><h3>Copyright © 2021 <a href='https://www.danielhwatts.com/' target='_blank'>Daniel H. Watts</a></h3></div>";
             $("#infoButton").toggleClass('esri-icon-question-clicked');
             rangeBuff.definitionExpression = "FID_12 = 1000";
             toggleNum = 2;   
@@ -1189,12 +1123,29 @@ var addSearch = new Search({
         $(".sidebarBottom").toggleClass('sidebarBottom-clicked');
       });
 
+    addSearch.on("search-start", function(event) {
+      $("#infoButton").toggleClass('esri-icon-question-clicked');
+    });
+
 
     addSearch.on("search-clear", function(event) {
       document.getElementById("sidebarDiv").innerHTML = "<div class='banner'><div class='line'><span class='fancy'>Select a Fort</span></div><div class='line'><span class='fancySmall'>And</span></div><div class='line'><span class='fancy'>Start Exploring</span></div></div>";
     });
       
-/**********End Edits**********/
+/**********Scale Based Label Renderer**********/
+
+  view.when().then(function() {
+    view.watch("scale", function(newValue) {
+    fort.labelingInfo = newValue <= 17000 ? fortLabelLarge : fortLabelSmall;    
+    })
+  });  
+
+  view.when().then(function() {
+    view.watch("scale", function(newValue) {
+    battery.labelingInfo = newValue <= 17000 ? battLabelLarge : battLabelSmall;    
+    })
+  });
+/**********End Edits**********/  
 
 });
 
