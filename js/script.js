@@ -809,7 +809,7 @@
           
         view.popup.viewModel.actions = false; 
         
-        view.watch('camera.tilt', function(newValue, oldValue, property, object) {
+        /*view.watch('camera.tilt', function(newValue, oldValue, property, object) {
           console.log(property , newValue);
         });
           
@@ -819,7 +819,7 @@
           
         view.watch('camera.heading', function(newValue, oldValue, property, object) {
           console.log(property , newValue);
-        });
+        });*/
 
 //********Send popup contents to sidebar*********//   
         
